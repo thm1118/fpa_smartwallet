@@ -1,5 +1,6 @@
 package com.fintech.smartwallet.controller;
 
+import com.fintech.smartwallet.client.MiddlePlatformClient;
 import com.fintech.smartwallet.client.TradeSimClient;
 import com.fintech.smartwallet.dto.AccountDTO;
 import com.fintech.smartwallet.dto.AssetOverviewDTO;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class AccountController {
     private final AccountService accountService;
     private final TradeSimClient tradeSimClient;
+    private final MiddlePlatformClient middlePlatformClient;
 
     @GetMapping
     public ResponseEntity<List<AccountDTO>> getAccounts(@CurrentUser UserPrincipal currentUser) {
@@ -70,5 +72,14 @@ public class AccountController {
         overview.setGrandTotal(walletTotal.add(investmentAssets));
 
         return ResponseEntity.ok(overview);
+    }
+
+    /**
+     * 查询客户档案 —— 调用MiddlePlatform获取客户档案信息
+     */
+    @GetMapping("/customer-profile/{customerNo}")
+    public ResponseEntity<Map<String, Object>> getCustomerProfile(@PathVariable String customerNo) {
+        Map<String, Object> profile = middlePlatformClient.getCustomerProfile(customerNo);
+        return ResponseEntity.ok(profile);
     }
 }

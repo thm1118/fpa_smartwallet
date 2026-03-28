@@ -46,6 +46,8 @@ service:
     url: http://localhost:8081
   tradesim:
     url: http://localhost:8082
+  middleplatform:
+    url: http://localhost:8087
 
 logging:
   level:
