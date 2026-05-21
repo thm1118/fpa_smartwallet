@@ -5,6 +5,7 @@ import com.fintech.smartwallet.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,4 +15,6 @@ public interface BudgetRepository extends JpaRepository<Budget, Long> {
     Optional<Budget> findByUserAndCategoryIdAndYearAndMonth(
         User user, Long categoryId, Integer year, Integer month
     );
+    List<Budget> findByYearAndMonth(Integer year, Integer month);
+    List<Budget> findByYearAndMonthAndAlertEnabledTrue(Integer year, Integer month);
 }

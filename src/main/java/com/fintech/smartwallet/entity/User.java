@@ -40,6 +40,9 @@ public class User {
     @Column(nullable = false)
     private Boolean active = true;
 
+    @Column(length = 50)
+    private String customerNo;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
